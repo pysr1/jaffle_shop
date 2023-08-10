@@ -1,4 +1,4 @@
-with orders as (
+with orders_cte as (
 
 	SELECT * FROM  {{ ref('orders') }}
 ),
@@ -9,7 +9,7 @@ final as (
 		order_date, 
 		sum(amount) as amount,
 		avg(amount) as aov
-	from orders
+	from orders_cte
     group by 
         order_date
 )
