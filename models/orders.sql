@@ -4,7 +4,16 @@ order by 1
 {% endset %}
 
 
-{% set payment_methods =  run_query(payment_methods_query) %}
+{% set results =  run_query(payment_methods_query) %}
+
+
+{% if execute %}
+{# Return the first column #}
+{% set payment_methods = results.columns[0].values() %}
+{% else %}
+{% set payment_methods = [] %}
+{% endif %}
+
 
 with orders as (
 
